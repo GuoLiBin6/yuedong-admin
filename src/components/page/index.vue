@@ -202,7 +202,7 @@
                 var formdata = new FormData();
                 formdata.append('userID',this.useradminID);
                 formdata.append('modal_file',imgBlob,'a.jpg');
-                axios.post('http://localhost:8080/admin/adminUserAvatar',formdata)
+                axios.post('http://39.107.66.152:8080/admin/adminUserAvatar',formdata)
                 .then(function(res){
                     console.log(res.data)
                 });

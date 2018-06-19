@@ -185,7 +185,6 @@ import qs from 'qs';
                 return row.tag === value;
             },
             handleEdit(index, row) {
-                if(this.chargeAdmin('change',row)){
                     this.idx = index;
                     const item = this.tableData[index];
                     this.form = {
@@ -199,18 +198,14 @@ import qs from 'qs';
                         
                     }
                     this.editVisible = true;
-                }else{
-                    this.$message.error('发生了错误！');
-                }
+                
                 
             },
             handleDelete(index, row) {
-                if(this.chargeAdmin('delete',row)){
                     this.idx = index;
                     this.delVisible = true;
-                }else{
-                    this.$message.error('没有足够的权限！');
-                }
+                
+                
                 
             },
             addDelAll(){

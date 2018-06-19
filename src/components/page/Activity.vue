@@ -181,7 +181,6 @@ import qs from 'qs';
                 return row.tag === value;
             },
             handleEdit(index, row) {
-                if(this.chargeAdmin('change',row)){
                     this.idx = index;
                     const item = this.tableData[index];
                     this.form = {
@@ -189,13 +188,12 @@ import qs from 'qs';
                         actName:item.actName,
                         actPlace:item.actPlace,
                         actTime:item.actTime,
-                        actClass:item.actClass
+                        actClass:item.actClass,
+                        userID:item.userID
 
                     }
                     this.editVisible = true;
-                }else{
-                    this.$message.error('没有足够的权限！');
-                }
+              
                 
             },
             handleDelete(index, row) {
@@ -226,7 +224,6 @@ import qs from 'qs';
                            delArr:arr
                             })).then((res) => {
                                 if(res.data == '1'){
-
                             that.$message.success(`删除成功`);
                             that.getData();
                                 }
@@ -252,6 +249,7 @@ import qs from 'qs';
                             if(res.data == '1'){
 
                             that.$message.success(`修改成功`);
+                            that.getData();
                             }
                     });
             },
@@ -262,16 +260,7 @@ import qs from 'qs';
                 this.delForm(delArr);
                 this.delVisible = false;
             },
-            //判断是否为超级管理员登录或正在操作本账号
-            chargeAdmin(arr,row){
-                if(arr == 'delete' && localStorage.getItem('ms_username') == 'admin' && localStorage.getItem('ms_username') != row.username){
-                    return true;
-                }else if(arr == 'change' && (localStorage.getItem('ms_username') == 'admin' || localStorage.getItem('ms_username') == row.username)){
-                    return true;
-                }else{
-                    return false;
-                }
-            }
+           
         }
     }
 
